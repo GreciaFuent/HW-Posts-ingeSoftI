@@ -1,4 +1,5 @@
 import postgres from "postgres";
+import Post from "./posts";
 
 
 
@@ -7,27 +8,14 @@ export default class PostRegistrar {
     constructor () {};
 
     public async run(id: number, title: string, description: string, author: string) {
-        this.isValidPost(id, title, description, author);
-        this.saveUserPost(id, title, description, author)
+        const post = Post.create(id, title, description, author);
+        console.log("antes de agregar el post")
+        console.log(post)
+        await this.saveUserPost(post.id.value, post.title.value, post.description.value, post.author.value)
+
     }
     
-
-    isValidPost(id: number, title: string, description: string, author: string){
-        if (typeof id === 'string') {
-            throw new Error('id must not be a string')
-        }
-        if (title.length  >=  15) {
-            throw new Error('id must not be a string')
-        }
-        if (description.length  >=  35) {
-            throw new Error('id must not be a string')
-        }
-        if (typeof author !== "string") {
-            throw new Error('id must not be a string')
-        }
-    }
     
-
     async saveUserPost(id: number, title: string, description: string, author: string): Promise<void> {
         try {
             const connectioString = 'postgresql://postgres.ihrsmmrruzsavbysxvhg:grecia@aws-1-us-east-2.pooler.supabase.com:6543/postgres'
