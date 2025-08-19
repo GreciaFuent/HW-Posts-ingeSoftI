@@ -1,7 +1,9 @@
 import InMemoryPostRepository from "@/utils/in-memory-post-repository";
 import PostRegistrar from "@/utils/post-register";
+import PostSearcher from "@/utils/post-searcher";
 import PostgresPostRepository from "@/utils/postgress-post-repository";
 import { NextRequest, NextResponse } from "next/server";
+import postgres from "postgres";
 
 
 
@@ -25,3 +27,25 @@ export async function POST(request: NextRequest){
         }, {status: 500})
     }
 }
+
+
+export  async function GET() {
+    try {
+        
+        const repository = new PostgresPostRepository();
+        const registrar = new PostSearcher(repository);
+        const posts = await registrar.runGet();
+
+        console.log(posts)
+
+        return new Response(JSON.stringify(posts), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+        });
+    }
+    catch (error){
+        console.log(error)
+    }
+    
+}
+

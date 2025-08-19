@@ -27,4 +27,10 @@ export default class InMemoryPostRepository implements PostRepository {
             author: author
         })
     }
+
+    public async seePost() {
+        return this.posts;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 import Post from "./posts";
 import PostRepository from "./post-repository";
 
+// esto es un caso de uso
 
 
 export default class PostRegistrar {
@@ -20,5 +21,4 @@ export default class PostRegistrar {
         await this.repository.save(post)
 
     }
-    
 }
