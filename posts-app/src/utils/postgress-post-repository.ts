@@ -45,7 +45,17 @@ export default class PostgresPostRepository implements PostRepository{
             await this.sql`UPDATE public.post SET id = ${id}, title = ${title}, description = ${description}, author = ${author} WHERE id= ${id};`;
         }
         catch {
-            throw new Error("Failed to save post");
+            throw new Error("Failed to update post");
+        }
+    }
+
+    async deletePost(id: number) {
+        try {
+
+            await this.sql`DELETE FROM public.post WHERE id= ${id};`;
+        }
+        catch {
+            throw new Error("Failed to delete post");
         }
     }
 

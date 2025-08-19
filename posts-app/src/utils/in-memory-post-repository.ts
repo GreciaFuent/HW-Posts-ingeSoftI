@@ -32,5 +32,11 @@ export default class InMemoryPostRepository implements PostRepository {
         return this.posts;
     }
 
+    public async updatePost(){
+        // asi que se quede jajajaj
+    }
 
+    public async deletePost(){
+        // asi que se quede jajajaj x22222
+    }
 }
