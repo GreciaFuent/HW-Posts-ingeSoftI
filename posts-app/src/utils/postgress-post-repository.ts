@@ -35,4 +35,19 @@ export default class PostgresPostRepository implements PostRepository{
         }
     }
 
+    async updatePost(post: Post) {
+        try {
+            const id = post.id.value
+            const title = post.title.value
+            const description = post.description.value
+            const author = post.author.value
+
+            await this.sql`UPDATE public.post SET id = ${id}, title = ${title}, description = ${description}, author = ${author} WHERE id= ${id};`;
+        }
+        catch {
+            throw new Error("Failed to save post");
+        }
+    }
+
+
 }
